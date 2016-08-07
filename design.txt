@@ -1,0 +1,12 @@
+5 types of status of a board position:
+1. previous black stone -- 1
+2. previous white stone -- 2
+3. no stone -- 0
+4. a black stone that was just been put -- 6
+5. a white stone that was just been put -- 7
+
+The data relationship between a stone and a stone chain. Choices are:
+1. ancestor relation. Since chain merges and eliminates are quite often, this may not be a good idea.
+2. foreign key. Does GAE have foreign key logic?
+3. multi-multi? Not necessary since it's a 1-multi.
+
