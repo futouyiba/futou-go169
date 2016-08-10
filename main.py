@@ -22,6 +22,7 @@ from go169Message import StoneMessage
 from go169Message import
 import game_conf
 from protorpc import messages
+from math import floor
 
 
 class Player(ndb.Model):
@@ -51,20 +52,47 @@ class Match(ndb.Model):
 
 
     @staticmethod
-    def separatePosition(integratePostion):
+    def position_int_to_row_column(integer_postion):
         """takes in a integer postion and returns (row position, column position)
-        integratedPosition: """
-        #todo
+        integratedPosition: a position according to index in the board list"""
+        row = floor(integer_postion/game_conf.len_each_side)
+        column = integer_postion - row*game_conf.len_each_side
+        return row, column
+
+    @staticmethod
+    def position_row_column_to_int(row, column):
+        """"""
+        integer_position = row*game_conf.len_each_side+column
+        return integer_position
 
     @staticmethod
     def getAdjacentPositions(integratePosition):
         """returns a list including all the adjacent postions, it could be up to 4 positions,
         and down to 2 positions since the board has borders"""
         #todo
+        up = integratePosition - game_conf.len_each_side
+        down = integratePosition + game_conf.len_each_side
+        left = integratePosition - 1
+        right = integratePosition + 1
+        row, column = Match.position_int_to_row_column(integratePosition)
+        if row == 0:
+            up = None
+        if row == (game_conf.len_each_side-1):
+            down = None
+        if column == 0:
+            left = None
+        if column == (game_conf.len_each_side-1):
+            right = None
+        return up, down, left, right
+
+
+
 
 class StoneChain(ndb.Model):
     #todo : should this be a ndb.Model?
     stones = ndb.KeyProperty
+
+
 
 class Position(ndb.Model):
     """"""
@@ -83,6 +111,10 @@ class Go169API(endpoints.remote.Service):
     def initiate_board(self):
         """initiate board. length of each side is defined in game_conf"""
         # TODO-Should it be a static method?
+        for row in range(1, game_conf.len_each_side):
+            for column in range(1, game_conf.len_each_side):
+
+
 
 
 """black starts first"""
