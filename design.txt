@@ -10,3 +10,6 @@ The data relationship between a stone and a stone chain. Choices are:
 2. foreign key. Does GAE have foreign key logic?
 3. multi-multi? Not necessary since it's a 1-multi.
 
+Concepts in a Go game are:
+1.
+

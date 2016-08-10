@@ -27,13 +27,15 @@ from protorpc import messages
 class Player(ndb.Model):
     """use a player model instead of a score model"""
     playerID = ndb.IntegerProperty(required=True)
-    score
-    playerName
+    score = ndb.FloatProperty(default=1000)
+    playerName = ndb.StringProperty(required=True)
+    wins = ndb.IntegerProperty(default=0)
+    loses = ndb.IntegerProperty(default=0)
 
 
 class Board(ndb.Model):
     """"""
-    positions = ndb.KeyProperty()
+    nodes = msgprop.EnumProperty(go169Message.StoneMessage, repeated=True)
 
 class Match(ndb.Model):
     """board_moves: """
@@ -45,6 +47,8 @@ class Match(ndb.Model):
     board_moves = msgprop.EnumProperty(go169Message.StoneMessage, repeated=True)
     # start_playerID is not needed because match always starts with black side.
     # start_playerID = msgprop.EnumProperty(go169Message.ColorSideMessage ,required=True)
+
+
 
     def make_move(self, postion, color):
         """change the board status & add a record in board moves."""

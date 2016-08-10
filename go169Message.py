@@ -25,7 +25,7 @@ class PutStoneMessage(messages.Message):
 class BoardStatusResponse(messages.Message):
     """ProtoRPC message definition to represent a reponse giving all board status within it.
     Since the data isn't big for the whole board, to prevent cheating and un-sync issues,
-    directly passing all the board status."""
+    directly transfer all the board status."""
     position_statuses = messages.IntegerField(1, required=True, repeated=True)
     matchID = messages.IntegerField(2, required=True)
 
